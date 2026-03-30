@@ -59,7 +59,6 @@ public class StationTests {
   @Test
   void contextLoads2() throws Exception{
 
-    Specification<Station> spec;
     List<Station> result;
     boolean hasResult;
 
@@ -71,14 +70,14 @@ public class StationTests {
     stationRepository.saveAll(stationLists);
 
     JpaSpecificationBuilder<Station> nameQuery = JpaSpecificationBuilder.of(Station.class);
-    spec = nameQuery.where().and().eq("stationName", "가산5역").build();
-    result = stationRepository.findAll(spec);
+    nameQuery.where().and().eq("stationName", "가산5역");
+    result = stationRepository.findAll(nameQuery.build());
     hasResult = result.stream().anyMatch(u -> "가산5역".equals(u.getStationName()));
     assertEquals(true, hasResult);
 
     JpaSpecificationBuilder<Station> codeQuery = JpaSpecificationBuilder.of(Station.class);
-    spec = codeQuery.where().and().eq("stationCode", "ST02").build();
-    result = stationRepository.findAll(spec);
+    codeQuery.where().and().eq("stationCode", "ST02").build();
+    result = stationRepository.findAll(codeQuery.build());
     hasResult = result.stream().anyMatch(u -> "ST02".equals(u.getStationCode()));
     assertEquals(true, hasResult);
   }
